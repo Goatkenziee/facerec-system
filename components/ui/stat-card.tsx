@@ -1,26 +1,27 @@
 import * as React from "react";
-import { TrendingUp, TrendingDown } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+import { Card, CardContent } from "./card";
 
-export function StatCard({ label, value, delta, up, icon }: {
-  label: string; value: string; delta?: string; up?: boolean; icon?: React.ReactNode;
+export function StatCard({ title, value, icon, trend, className }: {
+  title: string;
+  value: string | number;
+  icon?: React.ReactNode;
+  trend?: { direction: "up" | "down"; label: string };
+  className?: string;
 }) {
   return (
-    <Card className="animate-fade-up">
-      <CardContent className="p-5">
+    <Card className={cn("", className)}>
+      <CardContent className="p-4">
         <div className="flex items-center justify-between">
-          <p className="text-sm text-muted-foreground">{label}</p>
-          {icon && <span className="text-muted-foreground">{icon}</span>}
+          <p className="text-sm text-muted-foreground">{title}</p>
+          {icon && <div className="text-muted-foreground">{icon}</div>}
         </div>
-        <div className="mt-2 flex items-end justify-between">
-          <span className="text-3xl font-semibold tracking-tight tabular-nums">{value}</span>
-          {delta && (
-            <span className={cn("flex items-center gap-1 text-sm font-medium", up ? "text-success" : "text-destructive")}>
-              {up ? <TrendingUp className="h-4 w-4" /> : <TrendingDown className="h-4 w-4" />}{delta}
-            </span>
-          )}
-        </div>
+        <p className="mt-1 text-2xl font-bold">{value}</p>
+        {trend && (
+          <p className={cn("mt-1 text-xs", trend.direction === "up" ? "text-emerald-400" : "text-red-400")}>
+            {trend.label}
+          </p>
+        )}
       </CardContent>
     </Card>
   );

@@ -1,11 +1,10 @@
 {
-  "updatedAt": "2026-07-08T17:15:12.932Z",
+  "updatedAt": "2026-07-08T17:55:28.657Z",
   "framework": "Next.js",
   "dbModels": [],
   "apiRoutes": [],
   "pages": [
-    "app/page.tsx",
-    "pages/_document.tsx"
+    "app/page.tsx"
   ],
   "components": [
     "app/layout.tsx",
@@ -34,6 +33,9 @@
     "@types/react-dom",
     "autoprefixer",
     "clsx",
+    "eslint",
+    "eslint-config-next",
+    "face-api.js",
     "lucide-react",
     "next",
     "postcss",
@@ -43,5 +45,5 @@
     "tailwindcss",
     "typescript"
   ],
-  "fileCount": 33
+  "fileCount": 34
 }

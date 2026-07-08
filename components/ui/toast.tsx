@@ -1,36 +1,56 @@
 "use client";
 import * as React from "react";
-import { CheckCircle2, AlertTriangle, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { X, CheckCircle, AlertCircle, Info } from "lucide-react";
 
-type Toast = { id: number; message: string; tone: "success" | "error" | "info" };
-const ToastCtx = React.createContext<{ toast: (message: string, tone?: Toast["tone"]) => void } | null>(null);
+type ToastType = "success" | "error" | "info";
+
+interface Toast {
+  id: string;
+  message: string;
+  type: ToastType;
+}
+
+const icons: Record<ToastType, React.ReactNode> = {
+  success: <CheckCircle className="h-4 w-4 text-emerald-400" />,
+  error: <AlertCircle className="h-4 w-4 text-red-400" />,
+  info: <Info className="h-4 w-4 text-blue-400" />,
+};
+
+const ToastContext = React.createContext<{
+  addToast: (message: string, type?: ToastType) => void;
+}>({ addToast: () => {} });
 
 export function ToastProvider({ children }: { children: React.ReactNode }) {
   const [toasts, setToasts] = React.useState<Toast[]>([]);
-  const toast = React.useCallback((message: string, tone: Toast["tone"] = "info") => {
-    const id = Date.now() + Math.random();
-    setToasts((t) => [...t, { id, message, tone }]);
-    setTimeout(() => setToasts((t) => t.filter((x) => x.id !== id)), 4000);
+  const addToast = React.useCallback((message: string, type: ToastType = "info") => {
+    const id = Math.random().toString(36).slice(2);
+    setToasts((prev) => [...prev, { id, message, type }]);
+    setTimeout(() => setToasts((prev) => prev.filter((t) => t.id !== id)), 4000);
   }, []);
   return (
-    <ToastCtx.Provider value={{ toast }}>
+    <ToastContext.Provider value={{ addToast }}>
       {children}
       <div className="fixed bottom-4 right-4 z-50 flex flex-col gap-2">
-        {toasts.map((t) => (
-          <div key={t.id} className={cn("flex items-center gap-2 rounded-lg border border-border bg-card px-4 py-3 text-sm shadow-lg animate-fade-up")}>
-            {t.tone === "success" && <CheckCircle2 className="h-4 w-4 text-success" />}
-            {t.tone === "error" && <AlertTriangle className="h-4 w-4 text-destructive" />}
-            <span>{t.message}</span>
-            <button onClick={() => setToasts((x) => x.filter((y) => y.id !== t.id))} className="ml-2 text-muted-foreground"><X className="h-3.5 w-3.5" /></button>
+        {toasts.map((toast) => (
+          <div
+            key={toast.id}
+            className={cn(
+              "flex items-center gap-2 rounded-lg border bg-card px-4 py-3 shadow-lg text-sm animate-in slide-in-from-right",
+            )}
+          >
+            {icons[toast.type]}
+            <span>{toast.message}</span>
+            <button onClick={() => setToasts((prev) => prev.filter((t) => t.id !== toast.id))} className="ml-2 rounded p-0.5 hover:bg-muted">
+              <X className="h-3 w-3" />
+            </button>
           </div>
         ))}
       </div>
-    </ToastCtx.Provider>
+    </ToastContext.Provider>
   );
 }
+
 export function useToast() {
-  const ctx = React.useContext(ToastCtx);
-  if (!ctx) throw new Error("useToast must be used within <ToastProvider>");
-  return ctx;
+  return React.useContext(ToastContext);
 }

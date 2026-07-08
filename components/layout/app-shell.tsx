@@ -4,8 +4,6 @@ import { cn } from "@/lib/utils";
 
 export interface NavItem { label: string; href: string; icon?: React.ReactNode }
 
-// Dashboard shell: fixed sidebar + top bar + scrollable content. Fills the
-// viewport (no dead margins) — the Linear/Vercel app frame.
 export function AppShell({ nav, brand, active, children }: {
   nav: NavItem[]; brand: React.ReactNode; active?: string; children: React.ReactNode;
 }) {
