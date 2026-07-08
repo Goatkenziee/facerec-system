@@ -1,13 +1,14 @@
 # FaceRec - Real-time Facial Detection System
 
-A real-time facial detection web app using your browser camera. Built with Next.js 14.
+A real-time facial detection web app that uses your browser camera. All processing happens on-device — no images are sent to any server.
 
 ## Features
-- Live camera feed with face detection overlay
-- Chrome FaceDetector API support (bounding boxes + landmarks)
-- Skin-tone heuristic fallback for other browsers
-- Real-time face count and status indicators
-- Fully client-side — no server uploads, privacy preserved
+
+- **Live camera feed** with start/stop controls
+- **FaceDetector API** (Chrome) — bounding boxes + facial landmarks
+- **Skin-tone heuristic fallback** for other browsers
+- **Real-time status dashboard** — camera status, detection status, face count
+- **Privacy-first** — everything runs in-browser
 
 ## Getting Started
 
@@ -16,12 +17,16 @@ npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) and allow camera access.
+Open [http://localhost:3000](http://localhost:3000) and click "Start Camera" to begin.
 
-## Deploy
+## Tech Stack
 
-```bash
-npm run build
-```
+- Next.js 14 (App Router)
+- TypeScript
+- Tailwind CSS
+- Web APIs (MediaDevices, Canvas, FaceDetector)
 
-Or deploy to Vercel directly from the GitHub repo.
+## Browser Support
+
+- **Chrome/Edge** — Full support with FaceDetector API (bounding boxes + landmarks)
+- **Firefox/Safari** — Skin-tone heuristic fallback
