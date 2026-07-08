@@ -1,10 +1,11 @@
 {
-  "updatedAt": "2026-07-08T17:09:21.154Z",
+  "updatedAt": "2026-07-08T17:15:12.932Z",
   "framework": "Next.js",
   "dbModels": [],
   "apiRoutes": [],
   "pages": [
-    "app/page.tsx"
+    "app/page.tsx",
+    "pages/_document.tsx"
   ],
   "components": [
     "app/layout.tsx",
@@ -25,8 +26,7 @@
     "components/ui/stat-card.tsx",
     "components/ui/table.tsx",
     "components/ui/tabs.tsx",
-    "components/ui/toast.tsx",
-    "features/auth/auth-form.tsx"
+    "components/ui/toast.tsx"
   ],
   "dependencies": [
     "@types/node",
