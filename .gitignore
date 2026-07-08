@@ -1,12 +1,7 @@
 node_modules
-.next
-out
-*.tsbuildinfo
 .env
-.env.local
-.env*.local
-.DS_Store
-*.pem
+.env.*
+!.env.example
+.next
 dist
-build
-coverage
+.DS_Store
