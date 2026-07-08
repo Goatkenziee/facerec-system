@@ -165,9 +165,9 @@ export default function HomePage() {
         </div>
       </header>
 
-      <main className="flex flex-1 flex-col items-center justify-center gap-8 p-6">
-        <div className="relative w-full max-w-2xl">
-          <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-black shadow-2xl shadow-emerald-500/5">
+      <main className="flex flex-1 flex-col items-center justify-center gap-6 p-6">
+        <div className="w-full max-w-2xl">
+          <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-black/40 shadow-2xl backdrop-blur-sm">
             <video ref={videoRef} autoPlay playsInline muted className="w-full opacity-0 absolute inset-0" />
             <canvas ref={canvasRef} className="w-full aspect-[4/3] object-cover" />
             {!cameraOn && (
@@ -239,7 +239,7 @@ export default function HomePage() {
             Uses your browser camera for real-time facial detection. No images are sent to any server — everything runs locally in your browser.
           </p>
           <ul className="space-y-1 text-xs text-white/30">
-            <li>• <span className="text-white/50 font-medium">FaceDetector API</span> — Chrome’s built-in face detection</li>
+            <li>• <span className="text-white/50 font-medium">FaceDetector API</span> — Chrome's built-in face detection</li>
             <li>• <span className="text-white/50 font-medium">Skin-tone heuristic</span> — Fallback for other browsers</li>
             <li>All processing is done on-device. Your privacy is preserved.</li>
           </ul>
